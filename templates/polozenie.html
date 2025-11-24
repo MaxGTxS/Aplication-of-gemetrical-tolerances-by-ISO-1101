@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4">Tolerancja położenia</h2>
+
+  <p>
+Tolerancje położenia dzielą się na: pozycji, współosiowości i symetrii, a także tolerancję 
+kształtu wyznaczonej powierzchni względem układu dwóch baz, która wprowadza ograniczenia 
+typowe dla tolerancji położenia. Tolerancje współosiowości i symetrii są szczególnymi przypadkami 
+tolerancji pozycji. W przypadku współosiowości wymagane jest, aby oś tolerowanego elementu była 
+współliniowa (czyli pokrywała się) z osią odniesienia, a teoretyczna odległość między nimi wynosiła 0. 
+Analogicznie, gdy przedmiotem tolerowania jest płaszczyzna, można określić warunek symetrii, odnosząc 
+się do płaszczyzny środkowej bazy.[8]
+  </p>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Rysunek_13.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Tolerancja pozycji osi otworu względem układu trzech płaszczyzn CAB. a) specyfikacja b) walcowe pole tolerancji [8]</i></p>
+    </div>
+
+  <p>
+Na rysunku 1 zaprezentowano przykład tolerancji położenia osi otworu względem układu 
+trzech płaszczyzn bazowych CAB. Wymiary określające położenie walcowego pola tolerancji 
+są wymiarami teoretycznie dokładnymi (TED – theoretically exact dimensions), które służą 
+do precyzyjnego zdefiniowania położenia w przestrzeni. W przedstawionym przykładzie zastosowano
+ trzy takie wymiary: kąt 90^∘oraz dwa wymiary liniowe wynoszące odpowiednio 100 mm i 68 mm.
+  </p>
+
+
+
+
+
+  <h3 class="mt-4">Wymiary teoretycznie dokładne (TED)</h3>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Tabela_polozenie.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 2. Odchyłka pozycji osi otworu i jej składowe [8];</i></p>
+    </div>
+  <p>
+Zgodnie z wymaganiami normy PN-EN ISO 1101, tolerancja pozycji – 
+podobnie jak inne tolerancje położenia – odnosi się do elementu zaobserwowanego, 
+co oznacza, że ogranicza jednocześnie odchyłki kierunku i kształtu [Rys. 2]. 
+W praktyce odchyłki kształtu zajmują jedynie niewielką część pola tolerancji
+ położenia. Oś rzeczywista (zaobserwowana) otworu powinna mieścić się w walcowym
+  polu tolerancji, którego oś jest prostopadła do bazy głównej C i znajduje się 
+  w odległości 100 mm od bazy drugorzędnej A oraz 68 mm od bazy trzeciorzędnej B. 
+  Wymiar teoretycznie dokładny (TED) przedstawiany jest w prostokątnej ramce i określa 
+  dokładne położenie lub kierunek elementu, grupy elementów, profilu, bądź wzajemne ustawienie b
+  az odniesienia w układzie.  [8]
+  </p>
+
+
+  <h3 class="mt-4">Przykład szyku otworów</h3>
+
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Rysunek_14.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 3. Tolerancja pozycji osi czterech otworów względem układu trzech płaszczyzn bazowych ABC oraz względem płaszczyzny bazowej A – specyfikacja i interpretacja dla wyrobu zaobserwowanego [8]</i></p>
+    </div>
+
+  <p>
+Na rysunku 3 zilustrowano przykład zastosowania tolerancji położenia
+ dla układu czterech otworów wykonanych w płycie. Każdy z otworów 
+ posiada pole tolerancji o średnicy T=0,05" mm" , prostopadłe do 
+ płaszczyzny bazowej A. Pola te rozmieszczone są w narożach prostopadłościanu 
+ o podstawie 24 × 18 mm, tworząc szyk otworów, który może przemieszczać się i obracać
+  względem krawędzi płyty, pod warunkiem, że cały układ pozostanie w granicach czterech 
+  większych pól tolerancji o średnicy T=0,15" mm" . Większe pola tolerancji są pozycjonowane 
+  względem baz ABC przy użyciu wymiarów teoretycznie dokładnych – kąta 90° oraz dwóch wymiarów 
+  liniowych, np.: [8]
+  </p>
+
+
+
+  <ul>
+    <li>dla pierwszego otworu: 14 mm i 12 mm,</li>
+    <li>dla drugiego otworu: 38 mm i 12 mm,</li>
+    <li>dla trzeciego otworu: 14 mm i 30 mm,</li>
+    <li>dla czwartego otworu: 38 mm i 30 mm.</li>
+  </ul>
+
+
+  <h3 class="mt-4">Wybór bazy</h3>
+ 
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Rysunek_15.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 4. Tolerancja współosiowości. Zmiana elementów tolerowanego i odniesienia definiuje inne wymagania [8]</i></p>
+    </div>
+
+  <p>
+    Na rysunku 4 przedstawiono przypadek tolerancji współosiowości na przykładzie wałka dwustopniowego, który pokazuje, jak istotny jest dobór odpowiedniego elementu odniesienia.
+W wariancie (a) tolerancja współosiowości T=0,1" mm " odnosi się do osi stopnia o średnicy nominalnej Ø20 mm względem osi walca o średnicy Ø10 mm (baza A). W tym przypadku oś stopnia Ø20 mieści się w polu tolerancji – wymaganie zostaje spełnione.
+</p>
+<p>
+Natomiast w wariancie (b), gdy elementem odniesienia jest oś stopnia Ø20 (baza B), a tolerowanym elementem oś walca Ø10, oś rzeczywista nie mieści się w zadanym polu tolerancji – wymaganie nie zostaje spełnione.
+Z analizy wynika, że jako bazę odniesienia należy wybierać elementy o większych wymiarach, o ile są one istotne w kontekście funkcjonalnym dla danej tolerancji.
+</p>
+<p>
+Odchyłkę współosiowości wyznacza średnica najmniejszego walca współosiowego
+ z osią odniesienia, który obejmuje rzeczywistą oś elementu. Można to przedstawić 
+ obrazowo: podczas kontroli „obkurcza się” walec tolerancji wokół osi odniesienia aż do 
+ momentu, gdy zetknie się z osią zaobserwowaną. Jeśli wówczas oś nadal mieści się w polu 
+ tolerancji – wymaganie jest spełnione. W przeciwnym wypadku, gdy oś wykracza poza dopuszczalne granice, tolerancja jest przekroczona. [8]
+
+  </p>
+
+  <h3 class="mt-4">Tolerancja symetrii</h3>
+
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Rysunek_16.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 5. Tolerancja symetrii powierzchni środkowej zaobserwowanej rowka (zaobserwowanej płaszczyzny symetrii rowka) względem płaszczyzny symetrii kostki (bazy A); a) specyfikacja b) interpretacja [8]</i></p>
+    </div>
+
+
+  <p>
+Na rysunku 5 zaprezentowano przykład zastosowania tolerancji symetrii. Jej celem jest zapewnienie,
+ by środkowa płaszczyzna rowka znajdowała się dokładnie w osi symetrii kostki. 
+  </p>
+
+  <p>
+    Elementem tolerowanym jest płaszczyzna środkowa rowka, natomiast elementem odniesienia – płaszczyzna symetrii wyznaczona przez dwie równoległe płaszczyzny przylegające do górnej i dolnej powierzchni kostki. 
+    Pole tolerancji o szerokości 0,08 mm rozmieszczone jest symetrycznie względem płaszczyzny odniesienia.
+  </p>
+
+  <p>
+    W analizowanym przypadku powierzchnia środkowa rowka znajduje się po 
+    jednej stronie płaszczyzny bazowej, stykając się z jedną z płaszczyzn 
+    granicznych pola tolerancji, co odpowiada odchyłce symetrii 0,08 mm. 
+    Taka sama wartość odchyłki wystąpiłaby, gdyby płaszczyzna środkowa znajdowała 
+    się dokładnie na granicy pola tolerancji, dotykając obu jego płaszczyzn ograniczających. [8]
+  </p>
+
+  <h3 class="mt-4">Tolerancja kształtu wyznaczonej powierzchni</h3>
+
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/polozenie/Rysunek_17.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 6.Tolerancja kształtu wyznaczonej powierzchni dla otworu [8] </i></p>
+    </div>
+
+
+  <p>
+    Na rysunku 6 przedstawiono zastosowanie tolerancji kształtu wyznaczonej powierzchni
+     względem układu baz A–B–C. W tym przypadku tolerancja ta ma charakter tolerancji 
+     położenia. Obecność symbolu kółka w narożniku linii odniesienia oznacza, że wymaganie 
+     dotyczy całej powierzchni przedstawionej w widoku, w którym określono jej teoretyczny zarys.
+     </p>
+     <p>
+Pole tolerancji ma postać ściętego walca o zewnętrznej średnicy 30,03 mm, przy czym płaszczyzna ścięcia znajduje się w odległości 7,03 mm, a grubość ścianki wynosi 0,06 mm. Układ baz A–B–C definiuje teoretycznie dokładne położenie pola tolerancji, a tym samym ogranicza łącznie odchyłki wymiaru, kształtu, kierunku oraz położenia elementu. [8]
+
+  </p>
+
+    <div class="text-center mt-5 mb-4">
+        <a href="{{ url_for('test_4') }}" class="btn btn-primary"> Przetestuj zdobytą wiedze!</a>
+    </div>
+
+</div>
+{% endblock %}

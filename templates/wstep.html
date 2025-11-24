@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4">Reguły interpretacji wymagań tolerancji</h2>
+
+    <p>W inżynierii stosuje się dwa podstawowe sposoby określania tolerancji:</p>
+    <ol>
+        <li><strong>Tolerowanie liczbowe</strong> – określa dopuszczalne graniczne wartości wymiaru:
+            <ul>
+                <li>Wymiar graniczny górny (np. B),</li>
+                <li>Wymiar graniczny dolny (np. A).</li>
+            </ul>
+            <p>Jeśli dotyczy wałka (elementu o wymiarze zewnętrznym), oznacza się go literą <strong>w</strong> (np. Bw), a wymiary zapisuje się małymi literami (np. odchyłka górna – es).  
+            Dla otworów stosuje się wielkie litery (np. EI – odchyłka dolna).</p>
+        </li>
+        <li><strong>Tolerowanie symboliczne</strong> – używa standardowych symboli ISO GPS, co pozwala na jednoznaczne określenie wymagań geometrycznych.</li>
+    </ol>
+
+    <h3>Przykład zapisu liczbowego</h3>
+    <p>∅45 +0,020/-0,050</p>
+    <ul>
+        <li>∅45 – nominalny wymiar (średnica 45 mm),</li>
+        <li>+0,020 – dopuszczalna górna odchyłka,</li>
+        <li>-0,050 – dopuszczalna dolna odchyłka.</li>
+    </ul>
+    <p>Średnica elementu może wynosić od <strong>44,950 mm</strong> do <strong>45,020 mm</strong>, aby nadal spełniała wymagania.</p>
+
+    <h3>Oznaczenie klasy tolerancji</h3>
+    <p>Oznaczenie składa się z litery i cyfry:</p>
+    <ul>
+        <li>H – dolna granica = 0 (np. otwory),</li>
+        <li>n – pole tolerancji przesunięte w stronę dodatnią (np. wałki).</li>
+    </ul>
+    <p>Cyfra określa klasę IT – im wyższa, tym większa tolerancja (np. IT5 – dokładna, IT18 – bardzo zgrubna).</p>
+
+    <h3>Przykłady zapisu tolerancji</h3>
+    <ul>
+        <li>∅45H8 – otwór, nominalny wymiar 45 mm, tolerancja IT8 (0,049 mm).</li>
+        <li>∅70n9 – wałek, nominalny wymiar 70 mm, tolerancja IT9 (+0,020 mm do +0,094 mm).</li>
+    </ul>
+
+    <div class="text-center mt-5 mb-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_1_5.jpg') }}" class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Tolerancje podstawowe ISO 286</i></p>
+    </div>
+    
+    <h3>Tabela przykładowych tolerancji (IT)</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Klasa IT</th>
+                <th>Otwór (górna odchyłka)</th>
+                <th>Wałek (górna odchyłka)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>IT5</td><td>0,002 – 0,005 mm</td><td>0,005 – 0,010 mm</td></tr>
+            <tr><td>IT6</td><td>0,005 – 0,010 mm</td><td>0,010 – 0,015 mm</td></tr>
+            <tr><td>IT7</td><td>0,010 – 0,020 mm</td><td>0,015 – 0,025 mm</td></tr>
+            <tr><td>IT8</td><td>0,020 – 0,050 mm</td><td>0,025 – 0,050 mm</td></tr>
+            <tr><td>IT9</td><td>0,050 – 0,090 mm</td><td>0,050 – 0,090 mm</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Obliczanie wartości granicznych wymiaru</h3>
+    <p>Dla ∅45H8: D<sub>min</sub> = 45 mm, D<sub>max</sub> = 45,049 mm.<br>
+    Dla ∅70n9: D<sub>min</sub> = 70,020 mm, D<sub>max</sub> = 70,094 mm.</p>
+
+    <h3>Tolerancje ogólne</h3>
+    <p>W dokumentacji technicznej często spotyka się wymiary bez podanych odchyłek – wtedy stosuje się tolerancje ogólne z norm (np. PN-EN 22768).</p>
+    <p>Zalety: uproszczenie zapisu, czytelność dokumentacji, łatwiejsze planowanie produkcji.</p>
+
+    <h4>Tabela tolerancji ogólnych dla wymiarów liniowych</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Klasa</th>
+                <th>0,5 – 3 mm</th>
+                <th>&gt;3 – 6 mm</th>
+                <th>&gt;6 – 30 mm</th>
+                <th>&gt;30 – 120 mm</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>f (dokładna)</td><td>±0,1</td><td>±0,1</td><td>±0,2</td><td>±0,3</td></tr>
+            <tr><td>m (średnia)</td><td>±0,2</td><td>±0,2</td><td>±0,4</td><td>±0,6</td></tr>
+            <tr><td>c (zgrubna)</td><td>±0,4</td><td>±0,6</td><td>±1,0</td><td>±1,6</td></tr>
+            <tr><td>v (bardzo zgrubna)</td><td>—</td><td>±1,0</td><td>±2,0</td><td>±3,0</td></tr>
+        </tbody>
+    </table>
+
+    <h2 class="mt-5">Tolerancje geometryczne</h2>
+    <p>
+        Tolerancje geometryczne zostały wprowadzone w celu ograniczenia niejednoznaczności
+        w specyfikowaniu geometrii wyrobów wyłącznie za pomocą wymiarów nominalnych i ich
+        odchyłek granicznych. Określają one dopuszczalne odchylenia od geometrii nominalnej
+        w zakresie kształtu, profilu, kierunku, położenia i bicia.
+    </p>
+    <p>
+        Definiowane są przy użyciu języka technicznego opartego na zbiorze symboli, definicji i zasad,
+        rozwijanego przez ISO/TC 213 <em>Specyfikacje wymiarowe i geometryczne wyrobów</em>.
+        W polskich normach system ten funkcjonuje jako
+        <strong>Specyfikacje geometrii wyrobów (GPS)</strong>.
+    </p>
+
+    <h3>Podział i symbole</h3>
+    <p>
+        Podział oraz symbole tolerancji geometrycznych określa norma
+        <strong>PN-EN ISO 1101:2006</strong>.
+    </p>
+    
+    <div class="text-center mt-5 mb-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_2.png') }}" class="img-fluid rounded shadow">
+     <p class="mt-2"><i>Rysunek 2. Podział tolerancji geometrycznych wg PN-EN ISO 1101:2006</i></p>
+    </div>
+
+
+    <ul>
+        <li>Tolerancje kształtu – nie wymagają wskazania elementu bazowego,</li>
+        <li>Tolerancje kierunku, położenia i bicia – wymagają wskazania bazy.</li>
+    </ul>
+
+    <h3>Zasady oznaczania – ramki tolerancji</h3>
+    <p>
+        Wymagania powinny być wyspecyfikowane w prostokątnej ramce, podzielonej na pola:
+    </p>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_3.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 3. Struktura informacji podawanych w ramce tolerancji na przykłądzie tolerancji pozycji</i></p>
+    </div>
+
+
+    <ol>
+        <li>Symbol charakterystyki geometrycznej,</li>
+        <li>Wartość tolerancji (w mm),</li>
+        <li>Baza lub układ baz (jeśli dotyczy).</li>
+    </ol>
+    <p>
+        Ramka łączy się z elementem za pomocą linii wskazującej zakończonej grotem:
+    </p>
+    <ul>
+        <li>na linii zarysu elementu – jeśli tolerowana jest powierzchnia,</li>
+        <li>na przedłużeniu linii wymiarowej – jeśli dotyczy osi, linii środkowej lub punktu.</li>
+    </ul>
+
+    <h3>Pole tolerancji</h3>
+    <p>
+        Pole tolerancji to przestrzeń ograniczona przez idealne geometrycznie powierzchnie lub linie,
+        opisana przez wymiar liniowy (tolerancję). Element tolerowany spełnia wymagania,
+        jeśli jego rzeczywista powierzchnia, oś czy linia mieszczą się w obrębie pola tolerancji.
+
+    </p>
+    <ul>
+        <li>W przypadku okrągłości – pole tolerancji leży w płaszczyźnie prostopadłej do osi.</li>
+        <li>Dla walca lub koła – stosuje się oznaczenie „Ø”.</li>
+        <li>Dla kuli – stosuje się oznaczenie „SØ”.</li>
+    </ul>
+
+    <h3>Oznaczanie elementu tolerowanego</h3>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_4.jpg') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 4. Przykład jak zaznaczać tolerancje</i></p>
+    </div>
+
+    <p>
+        Ramka tolerancji powinna być połączona z tolerowanym elementem linią wskazującą:
+    </p>
+    <ul>
+        <li>Z grotem na powierzchni elementu – gdy tolerowana jest rzeczywista powierzchnia lub linia,</li>
+        <li>Na przedłużeniu linii wymiarowej – gdy tolerowana jest oś, linia lub powierzchnia środkowa.</li>
+    </ul>
+    <p>
+        Linia wskazująca powinna być prostopadła do powierzchni elementu. Minimalna odległość grota
+        od linii wymiarowej wynosi 4 mm.
+    </p>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_6.jpg') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 5. Przykład jak zaznaczać tolerancje i jej nie zaznaczać</i></p>
+    </div>
+
+    <h3>Uwagi historyczne</h3>
+    <p>
+        W starszej normie ISO 1101:1983 dopuszczano łączenie ramek tolerancji bezpośrednio
+        z osiami lub płaszczyznami środkowymi, a także bezpośrednie połączenie ramki z trójkątem bazy.
+    </p>
+
+ <!-- BAZA -->
+
+<h2 class="mt-5">Oznaczanie baz pomiarowych</h2>
+    <p>
+        Bazy pomiarowe to powierzchnie, punkty lub osie elementu, które służą jako odniesienie 
+        przy kontroli wymiarów lub tolerancji. Norma ISO 5459 opisuje zasady ich oznaczania.
+    </p>
+
+    <h4 class="mt-3">Rodzaje baz</h4>
+    <ul>
+        <li><strong>Baza główna (Primary datum)</strong> – podstawowe odniesienie.</li>
+        <li><strong>Baza wtórna (Secondary datum)</strong> – odniesienie pomocnicze.</li>
+        <li><strong>Baza trzeciorzędna (Tertiary datum)</strong> – najmniej istotne odniesienie.</li>
+    </ul>
+
+    <h4 class="mt-3">Typy baz</h4>
+    <p>Bazy są ustanawiane przy użyciu elementów bazy i symulowanych elementów bazy. 
+    Mogą być także łączone w układy baz.</p>
+
+     <h4 class="mt-3">Elementy baz</h4>
+     <p>
+    Rzeczywisty (nieidealny) element integralny obiektu służący do określenia bazy (np. 
+    powierzchnia elementu lub otworu.
+     </p>
+     <p>
+    Symulowany element - Rzeczywisty (nieidealny) element integralny obiektu służący do określenia bazy (np. 
+    powierzchnia elementu lub otworu
+     </p>
+
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/wstep/Rysunek_7.jpg') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 6. Ilustracja do wizualizacji baz</i></p>
+    </div>
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-light">
+            <tr>
+                <th>Rodzaj bazy</th>
+                <th>Charakterystyka</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Baza konstrukcyjna</td>
+                <td>Ułatwia analizę wymiarową, krótkie łańcuchy wymiarowe, większa dokładność wykonania części.</td>
+            </tr>
+            <tr>
+                <td>Baza obróbkowa</td>
+                <td>Ułatwia proces technologiczny, prostsza budowa uchwytów obróbkowych.</td>
+            </tr>
+            <tr>
+                <td>Baza pomiarowa</td>
+                <td>Umożliwia łatwą kontrolę wymiarów po wykonaniu przedmiotu.</td>
+            </tr>
+            <tr>
+                <td>Baza rzeczywista</td>
+                <td>Odnosi się do istniejących linii/powierzchni na przedmiocie.</td>
+            </tr>
+            <tr>
+                <td>Baza wyobrażalna</td>
+                <td>Odnosi się do teoretycznych linii/płaszczyzn (np. osi symetrii).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="mt-4">
+        Wymiarowanie od baz konstrukcyjnych stosuje się, gdy zależy na podaniu na rysunku wymiarów 
+        istotnych dla działania części w zespole. 
+        Wymiarowanie od baz obróbkowych natomiast – gdy priorytetem jest uproszczenie procesu technologicznego.
+    </p>
+
+    <div class="text-center mt-5 mb-4">
+        <a href="{{ url_for('test_2') }}" class="btn btn-primary"> Przetestuj zdobytą wiedze!</a>
+    </div>
+</div>
+{% endblock %}

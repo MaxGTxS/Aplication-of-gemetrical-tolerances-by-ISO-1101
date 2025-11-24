@@ -1,0 +1,318 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Test wiedzy – Tolerancja kierunku</h1>
+<form id="quizForm">
+    <ol>
+        <li>
+            Co określa tolerancja równoległości?<br>
+            <label><input type="radio" name="q1" value="A"> A) Dopuszczalne odchylenie powierzchni, linii lub osi od idealnej równoległości do odniesienia.</label><br>
+            <label><input type="radio" name="q1" value="B"> B) Dokładność wymiaru średnicy otworu.</label><br>
+            <label><input type="radio" name="q1" value="C"> C) Kąt nachylenia względem płaszczyzny podstawy.</label>
+        </li>
+        <li>
+            Jaka jest różnica między tolerancją prostopadłości a równoległości?<br>
+            <label><input type="radio" name="q2" value="A"> A) Prostopadłość dotyczy odchylenia od kąta 90°, równoległość od kąta 0°.</label><br>
+            <label><input type="radio" name="q2" value="B"> B) Obie określają to samo wymaganie.</label><br>
+            <label><input type="radio" name="q2" value="C"> C) Równoległość odnosi się wyłącznie do wymiarów liniowych.</label>
+        </li>
+        <li>
+            Jak interpretować tolerancję kąta pochylenia (ang. angularity)?<br>
+            <label><input type="radio" name="q3" value="A"> A) Dopuszczalne odchylenie od zadanego kąta innego niż 0° i 90°.</label><br>
+            <label><input type="radio" name="q3" value="B"> B) Dokładność wymiaru w milimetrach.</label><br>
+            <label><input type="radio" name="q3" value="C"> C) Określenie odchyłki powierzchni chropowatej.</label>
+        </li>
+        <li>
+            Jak oznacza się pole tolerancji kierunku na rysunku technicznym?<br>
+            <label><input type="radio" name="q4" value="A"> A) Za pomocą symbolu w ramce tolerancji, np. ⊥ dla prostopadłości.</label><br>
+            <label><input type="radio" name="q4" value="B"> B) Wyłącznie opisem tekstowym w uwagach rysunku.</label><br>
+            <label><input type="radio" name="q4" value="C"> C) Strzałką wskazującą powierzchnię.</label>
+        </li>
+    </ol>
+
+    <button type="button" class="btn btn-primary" onclick="checkAnswers()">Sprawdź wynik</button>
+</form>
+
+<div id="result" style="margin-top:20px; font-weight:bold;"></div>
+
+<style>
+.correct { background-color: #c8e6c9; }
+.incorrect { background-color: #ffcdd2; }
+</style>
+
+<script>
+function checkAnswers() {
+    const correctAnswers = {
+        q1: "A", q2: "A", q3: "A", q4: "A"
+    };
+
+    let score = 0;
+    let total = Object.keys(correctAnswers).length;
+
+    document.querySelectorAll("label").forEach(label => {
+        label.classList.remove("correct", "incorrect");
+    });
+
+    for (let q in correctAnswers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        let correctInput = document.querySelector(`input[name="${q}"][value="${correctAnswers[q]}"]`);
+
+        if (correctInput) correctInput.parentElement.classList.add("correct");
+
+        if (selected) {
+            if (selected.value === correctAnswers[q]) {
+                score++;
+            } else {
+                selected.parentElement.classList.add("incorrect");
+            }
+        }
+    }
+
+    document.getElementById("result").innerHTML =
+        `Twój wynik: ${score} / ${total} (${Math.round(score/total*100)}%)`;
+}
+</script>
+<h1>Test – Zadania z modelem 3D Tolerancja kierunku</h1>
+
+<!-- Zadanie z modelem 3D -->
+
+<div class="card mt-3">
+  <div class="card-body">
+    <h5>Zadanie 1: Analiza modelu 3D pod względem tolerancji kierunku</h5>
+    <p>Obejrzyj poniższy model 3D i wykonaj polecenia.
+      Zanzacz na modelu bazy A główną i bazę B dodatkową oraz tolerancje kierunku prostopadłości 0.3 i równoległości 0.3:
+    </p>
+
+    <!-- przykład modelu 3D -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <model-viewer 
+        src="{{ url_for('static', filename='model/untitled.glb') }}" 
+        alt="Model 3D"
+        auto-rotate 
+        camera-controls 
+        ar 
+        shadow-intensity="1"
+        style="width: 100%; height: 500px; margin-top: 20px; border: 1px solid #ccc; border-radius: 12px;">
+    </model-viewer>
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/wal/0.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Model 3D wykonany w NX</i></p>
+    </div>
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/wal/model.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 2. Model 2D</i></p>
+    </div>
+
+    <h2>Krok 1 wskaż dolną powierzchnię płyty, oznacz literą A - baza główna</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol8')">Pokaż rozwiązanie</button>
+    <div id="sol8" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/wal/1.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 3: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Krok 2 wskaż boczną powierzchnię płyty - baza dodatkowa B:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol9')">Pokaż rozwiązanie</button>
+    <div id="sol9" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/wal/2.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 4: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Krok 3 Zaznaczenie tolerancji prostopadłości 0.3 osi walca do dolnej płyty:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol10')">Pokaż rozwiązanie</button>
+    <div id="sol10" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/wal/4.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 5: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Krok 4 Zaznaczenie tolerancji równoległości 0.3 walca do bazy odniesienia B:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol11')">Pokaż rozwiązanie</button>
+    <div id="sol11" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/wal/5.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 6: Model 3D elementu w programie NX</em></p>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Zadanie 2 -->
+<div class="card mt-3">
+  <div class="card-body">
+    <h5>Zadanie 2: Analiza modelu 3D pod względem tolerancji kierunku</h5>
+    <p>Obejrzyj poniższy model 3D i wykonaj polecenia.</p>
+
+    <!-- przykład modelu 3D -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <h2>Tolerancja kierunku </h2>
+    <model-viewer 
+        src="{{ url_for('static', filename='model/prostokat_uciety.glb') }}" 
+        alt="Model 3D"
+        auto-rotate 
+        camera-controls 
+        ar 
+        shadow-intensity="1"
+        style="width: 100%; height: 500px; margin-top: 20px; border: 1px solid #ccc; border-radius: 12px;">
+    </model-viewer>
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/0.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Model 3D wykonany w NX</i></p>
+    </div>
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/pusty_prostakoad_2d.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 2. Model 2D</i></p>
+    </div>
+
+    <h2>Zaznacz powierzchnię dolną modelu jako bazę główną A:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol1')">Pokaż rozwiązanie</button>
+    <div id="sol1" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/1.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 3: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Zaznacz powierzchnie boczną jako bazę pomocniczą B:
+</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol2')">Pokaż rozwiązanie</button>
+    <div id="sol2" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/2.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 4: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Zaznacz powierzchnie, gdzie zaobserwowano tolerancje kierunku równoległości, która powinna wynosić 0.1 i odnosić się do bazy głównej:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol3')">Pokaż rozwiązanie</button>
+    <div id="sol3" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/3.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 5: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Na tym samym rysunku zaznacz tolerancje kierunku kątową również wynosząca 0.1, która powinna być powierzchnią pochyloną i donosić się do obu baz: </h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol4')">Pokaż rozwiązanie</button>
+    <div id="sol4" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/4.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 6: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Zaznacz też dodatkową tolerancję kąta 0.02 w odniesieniu do samej bazy A:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol5')">Pokaż rozwiązanie</button>
+    <div id="sol5" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/5.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 7: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Następnie zaznacz na powierzchni tolerancje kierunku prostopadłości 0.1 odnoszącej się do obu baz:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol6')">Pokaż rozwiązanie</button>
+    <div id="sol6" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/6.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 8: Model 3D elementu w programie NX</em></p>
+    </div>
+    <h2>Oraz dodatkową tolerancje prostopadłości tylko do bazy A wynosząca 0.02:</h2>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol7')">Pokaż rozwiązanie</button>
+    <div id="sol7" class="mt-3" style="display:none;">
+      <img src="{{ url_for('static', filename='images/kierunek/7.png') }}" 
+         alt="Rysunek tolerancji NX" 
+         style="max-width: 100%; margin-top: 20px; border: 1px solid #aaa; border-radius: 8px;">
+    <p><em>Rysunek 9: Końcowy model 3D elementu w programie NX</em></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="card mt-3">
+  <div class="card-body">
+    <h5>Zadanie 3: Analiza modelu 3D pod względem tolerancji kierunku MMR</h5>
+    <p>Obejrzyj poniższy model 3D i wykonaj polecenia.
+      Na rysunku przedstawiono wałek o średnicy nominalnej Ø50 h7, osadzony na płycie bazowej A. Oś wałka powinna być prostopadła do powierzchni bazowej A w granicach tolerancji ⟂Ø0,03 A. Dopuszczono stosowanie warunku MMR (Maximum Material Requirement – warunek materiału maksymalnego). Zmierzona średnica wałka podczas pomiaru wyniosła Ø49,980 mm.
+    </p>
+
+    <!-- przykład modelu 3D -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <h2>Tolerancja kierunku </h2>
+    <model-viewer 
+        src="{{ url_for('static', filename='model/untitled.glb') }}" 
+        alt="Model 3D"
+        auto-rotate 
+        camera-controls 
+        ar 
+        shadow-intensity="1"
+        style="width: 100%; height: 500px; margin-top: 20px; border: 1px solid #ccc; border-radius: 12px;">
+    </model-viewer>
+    <div class="text-center mt-4">
+      <img src="{{ url_for('static', filename='images/kierunek/mmr/mmr.png') }}"  class="img-fluid rounded shadow">
+      <p class="mt-2"><i>Rysunek 1. Model 3D wykonany w NX</i></p>
+    </div>
+    <div class="text-center mt-4">
+      <img src="{{ url_for('static', filename='images/kierunek/wal/model.png') }}"  class="img-fluid rounded shadow">
+      <p class="mt-2"><i>Rysunek 2. Model 2D</i></p>
+    </div>
+
+    
+    <h4>Wypisz wszystkie dane pomiarowe:</h4>
+    <button class="btn btn-primary mt-3" onclick="toggleSolution('sol13', this)">Pokaż rozwiązanie</button>
+    <div id="sol13" class="alert alert-info mt-2" style="display:none;">
+      <p><b>Zmierzona średnica wałka:</b> Ø49,980 mm</p>
+      <p><b>Nominalny zakres wymiarowy:</b> Ø50,000 / Ø49,975 mm</p>
+      <p><b>Długość kontrolowanego odcinka:</b> L = 50 mm</p>
+    </div>
+
+     <!-- Zadanie A -->
+    <h5>a) Oblicz wartość bonusu materiałowego (MMC - rzeczywisty):</h5>
+    <button class="btn btn-primary btn-sm mt-2" onclick="toggleSolution('sol14', this)">Pokaż rozwiązanie</button>
+    <div id="sol14" class="alert alert-info mt-2" style="display:none;">
+      <b>Obliczenia:</b><br>
+      MMC = 50,000 mm<br>
+      Rzeczywisty wymiar = 49,980 mm<br>
+      Bonus = 50,000 − 49,980 = <b>0,020 mm</b><br>
+      <b>Odpowiedź:</b> Bonus materiałowy = <b>0,020 mm</b>.
+    </div>
+
+    <!-- Zadanie B -->
+    <h5>b) Wyznacz efektywną tolerancję prostopadłości przy uwzględnieniu MMR:</h5>
+    <button class="btn btn-primary btn-sm mt-2" onclick="toggleSolution('sol15', this)">Pokaż rozwiązanie</button>
+    <div id="sol15" class="alert alert-info mt-2" style="display:none;">
+      Ramka nominalna = 0,03 mm<br>
+      Bonus = 0,02 mm<br>
+      Dostępna tolerancja = 0,03 + 0,02 = <b>0,05 mm</b><br>
+      <b>Odpowiedź:</b> Efektywna tolerancja = <b>0,05 mm</b>.
+    </div>
+
+    <!-- Zadanie C -->
+    <h5>c) Sprawdź, czy rzeczywisty pomiar (0,035 mm) spełnia wymagania:</h5>
+    <button class="btn btn-primary btn-sm mt-2" onclick="toggleSolution('sol16', this)">Pokaż rozwiązanie</button>
+    <div id="sol16" class="alert alert-info mt-2" style="display:none;">
+      Mierzony odchył: <b>r = 0,035 mm</b><br>
+      Dostępna tolerancja (z MMR): <b>0,05 mm</b><br>
+      Porównanie: 0,035 ≤ 0,05 → <b>spełnia wymagania</b>.<br>
+      <b>Odpowiedź:</b> Wynik mieści się w dopuszczalnym zakresie.
+    </div>
+
+    <!-- Zadanie D 
+    <h5>d) Wniosek końcowy:</h5>
+    <button class="btn btn-primary btn-sm mt-2" onclick="toggleSolution('sol17', this)">Pokaż rozwiązanie</button>
+    <div id="sol17" class="alert alert-success mt-2" style="display:none;">
+      Bez warunku MMR tolerancja wynosiłaby 0,03 mm, więc r = 0,035 mm byłoby <b>niezgodne</b>.<br>
+      Z warunkiem MMR (bonus = 0,02 mm) dopuszczalne odchylenie rośnie do 0,05 mm.<br>
+      <b>Wniosek:</b> Element <b>zgodny z wymaganiami rysunku technicznego</b>.
+    </div> -->
+  </div>
+</div>
+
+<script>
+function toggleSolution(id) {
+  var x = document.getElementById(id);
+  x.style.display = (x.style.display === "none") ? "block" : "none";
+}
+
+</script>
+{% endblock %}

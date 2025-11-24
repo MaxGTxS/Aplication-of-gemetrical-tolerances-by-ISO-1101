@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4">Tolerancja kierunku</h2>
+
+    <p>
+        Aby określić tolerancję kierunku danego elementu, konieczne jest wskazanie odpowiednich 
+        baz odniesienia (jednej lub kilku), względem których definiowane jest jego położenie kątowe. 
+        Bazy te stanowią podstawę do wyznaczenia teoretycznie dokładnego położenia pola tolerancji, 
+        w którym powinien znajdować się cały rzeczywisty element — oś lub powierzchnia.
+W przypadku tolerancji kierunku, ramka tolerancji powinna zawierać trzy lub cztery pola, określające 
+odpowiednio symbol tolerancji, wartość graniczną oraz bazę (lub układ baz). [8]
+
+    </p>
+
+    <!-- Model 3D -->
+    <h2 class="mt-5">Specyfikacja i interpretacja</h2>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <model-viewer 
+        src="{{ url_for('static', filename='model/Untitled.glb') }}" 
+        alt="Model 3D"
+        auto-rotate 
+        camera-controls 
+        ar 
+        shadow-intensity="1"
+        style="width: 100%; height: 500px; margin-top: 20px; border: 1px solid #ccc; border-radius: 12px;">
+    </model-viewer>
+
+    <!-- Rysunek 1 -->
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/model_rzut_testowy.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Tolerancja prostopadłości względem płaszczyzny.</i></p>
+    </div>
+
+    <p>
+Na rysunku 1 oraz modelu 3d przedstawiono przykład określenia tolerancji prostopadłości 
+osi względem płaszczyzny odniesienia. Elementem tolerowanym jest oś rzeczywistego 
+trzpienia (linia środkowa elementu). Bazę odniesienia stanowi płaszczyzna idealna, 
+przylegająca do powierzchni rzeczywistej oznaczonej jako baza A. Wartość tolerancji 
+została poprzedzona symbolem „Ø”, który wskazuje, że pole tolerancji ma postać walca o 
+osi prostopadłej do bazy, o średnicy T=0,03" mm" . W praktyce oznacza to, że rzeczywista 
+oś elementu powinna mieścić się wewnątrz tego walca prostopadłego do powierzchni bazowej A. [8]
+    </p>
+
+    <!-- Rysunek 2 -->
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/Rysunek_10.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 2. Tolerancja prostopadłości, równoległości oraz nachylenia płaszczyzny względem osi. [8]</i></p>
+    </div>
+
+    <p>
+ Na rysunku 2 przedstawiono przykłady różnych tolerancji kierunku – prostopadłości, 
+ równoległości oraz kątowości powierzchni względem osi odniesienia. Można zauważyć, 
+ że tolerancje równoległości i prostopadłości są szczególnymi przypadkami tolerancji 
+ kątowości. Dla prostopadłości kąt teoretycznie dokładny wynosi 90°, natomiast dla równoległości – 0°.
+    </p>
+
+    <p>
+Tolerancja prostopadłości o wartości T=0,04" mm"  (rys. 10) określa obszar pomiędzy dwiema 
+równoległymi płaszczyznami oddalonymi o 0,04 mm, które są prostopadłe do bazy A, czyli osi 
+walca wpisanego w otwór. Wszystkie punkty powierzchni kontrolowanej tulei, wskazanej na rysunku, 
+muszą mieścić się pomiędzy tymi płaszczyznami.
+Analogicznie, tolerancja równoległości o wartości T=0,05" mm " określa pole tolerancji ograniczone 
+dwiema płaszczyznami równoległymi do bazy A, oddalonymi od siebie o 0,05 mm. W tym przypadku 
+tolerancja nie odnosi się do odległości między powierzchniami, lecz jedynie ogranicza odchyłkę
+ ich równoległości względem osi bazowej
+
+    </p>
+
+    <p>
+Dla tolerancji kątowości T=0,06" mm"  (rys. 10) pole tolerancji tworzą dwie płaszczyzny równoległe,
+ nachylone pod teoretycznym kątem 60°względem osi bazowej, oddalone od siebie o 0,06 mm. Wszystkie 
+ punkty kontrolowanej powierzchni muszą znajdować się w tym ograniczonym obszarze. [8]
+    </p>
+
+    <!-- Rysunek 3 -->
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/Rysunek_11.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 3. Tolerancja równoległości płaszczyzny względem płaszczyzny. Tolerancje nachylenia oraz prostopadłości płaszczyzny względem płaszczyzny lub układu dwóch płaszczyzn.[8]</i></p>
+    </div>
+    <p>
+Na rysunku 3 zaprezentowano przykłady tolerancji równoległości oraz prostopadłości 
+powierzchni względem płaszczyzny odniesienia. Tolerancja prostopadłości T=0,03" mm " 
+dla powierzchni bocznej kostki względem bazy A oznacza, że wszystkie punkty tej powierzchni 
+muszą mieścić się pomiędzy dwiema płaszczyznami oddalonymi o 0,03 mm, które są prostopadłe do 
+płaszczyzny bazowej przylegającej do podstawy kostki.
+Warto zauważyć, że taka tolerancja nie ogranicza odchyłki prostopadłości względem tylnej 
+ścianki kostki.
+
+    </p>
+
+    <p>
+ Z tego powodu wprowadza się dodatkową tolerancję prostopadłości T=0,05" mm " względem układu baz A i B, gdzie:
+</p>
+
+<ul>
+    <li>Bazą główną jest baza A, czyli płaszczyzna przylegająca do zaobserwowanej powierzchni podstawy kostki.</li>
+    <li>Bazą drugorzędną jest baza B, czyli płaszczyzna prostopadła do bazy A i stykająca się z zaobserwowaną powierzchnią tylnej ścianki kostki.</li>
+</ul>
+
+<p>
+W tym przypadku obszar tolerancji stanowią dwie płaszczyzny oddalone o 0,05 mm, które muszą być prostopadłe zarówno do bazy A, jak i do bazy B.
+</p>
+
+    <p>
+Tolerancja równoległości T=0,01" mm " górnej powierzchni kostki względem bazy A [Rys. 4]
+ oznacza, że wszystkie punkty tej powierzchni muszą mieścić się pomiędzy dwiema płaszczyznami 
+ równoległymi do idealnej płaszczyzny bazowej, oddalonymi od siebie o 0,01 mm. [Rys.25] 
+Należy podkreślić, że w tym przypadku tolerancja równoległości nie określa odległości pola 
+tolerancji od bazy, a jedynie dopuszcza określone odchylenie kierunkowe. W przypadku tolerancji
+ płaszczyzny względem płaszczyzny nie ma konieczności definiowania drugorzędnej bazy odniesienia. [8]
+
+    </p>
+
+    <!-- Rysunek 4 -->
+    <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/kierunek/Rysunek_12.png') }}"  class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 4. Powierzchnia zaobserwowana, baza i pole tolerancji dla tolerancji równoległości płaszczyzny względem płaszczyzny wyspecyfikowanej na rys. i modelu 3D wyżej.[8]</i></p>
+    </div>
+
+    <div class="text-center mt-5 mb-4">
+        <a href="{{ url_for('test_3') }}" class="btn btn-primary"> Przetestuj zdobytą wiedze!</a>
+    </div>
+
+</div>
+{% endblock %}

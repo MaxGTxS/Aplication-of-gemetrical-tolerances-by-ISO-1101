@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- Tytuł -->
+  <div class="text-center mb-5">
+    <h1 class="display-4">Praca magisterska</h1>
+    <h4 class="text-muted">Tolerancje geometryczne w inżynierii mechanicznej</h4>
+    <p class="mt-3">Autor: Inż. Maksymilian Madej</p>
+  </div>
+
+  
+
+  <!-- Sekcja z tekstem i zdjęciem -->
+  <div class="row mb-5">
+    <div class="col-md-7">
+      <h3>Wprowadzenie</h3>
+      <p class="text-justify">
+        W niniejszej pracy przedstawiono zagadnienia związane z tolerancjami geometrycznymi,
+        ich wpływem na proces wytwarzania oraz rolą w zapewnieniu jakości wyrobów. 
+        Tolerancje geometryczne stanowią integralny element dokumentacji technicznej 
+        i pozwalają na jednoznaczne określenie dopuszczalnych odchyłek wymiarowych.
+      </p>
+      <p class="text-justify">
+        Współczesne normy ISO umożliwiają precyzyjne definiowanie wymagań jakościowych,
+        co wpływa na poprawę efektywności produkcji i minimalizację strat wynikających z błędów montażowych.
+      </p>
+    </div>
+    <div class="col-md-5">
+      <img src="{{ url_for('static', filename='images/index/Rysunek 0 Logo politechniki.png') }}" 
+           class="img-fluid rounded shadow logo-img" alt="Ilustracja wprowadzenia">
+    </div>
+  </div>
+
+  <!-- Sekcja z cytatem / akcentem -->
+  <div class="alert alert-secondary text-center">
+    <em>"Dokładność wykonania elementów maszyn jest kluczowym czynnikiem wpływającym 
+    na niezawodność i trwałość całego układu."</em>
+  </div>
+
+  <!-- Sekcja z kilkoma obrazkami 
+  <div class="row mt-5">
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename='images/index/test.png') }}" class="img-fluid rounded shadow" alt="Model 1">
+      <p class="mt-2 text-center">Model CAD elementu</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename='images/index/test.png') }}" class="img-fluid rounded shadow" alt="Model 2">
+      <p class="mt-2 text-center">Analiza tolerancji</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <img src="{{ url_for('static', filename='images/index/test.png') }}" class="img-fluid rounded shadow" alt="Model 3">
+      <p class="mt-2 text-center">Wyniki pomiarów</p>
+    </div>
+  </div>
+-->
+<div class="container mt-5">
+
+  <!-- Nagłówek rozdziału -->
+  <h2 class="mb-4">1. Normalizacja w rysunku technicznym maszynowym (ISO GPS)</h2>
+
+  <!-- Tekst główny -->
+  <p class="text-justify">
+    Współczesna inżynieria wymaga precyzyjnej i jednoznacznej specyfikacji wymagań
+    geometrycznych, co jest kluczowe dla zapewnienia wysokiej jakości produkcji,
+    skutecznej współpracy międzynarodowej oraz optymalizacji kosztów. 
+    System ISO GPS (Geometrical Product Specifications) – globalny język wymiany 
+    informacji w dokumentacji technicznej – umożliwia skuteczne określanie oraz 
+    weryfikację cech geometrycznych wyrobów.
+  </p>
+
+  <!-- Wypunktowanie -->
+  <h5>Korzyści wdrożenia systemu ISO GPS:</h5>
+  <ul>
+    <li>Ułatwienie współpracy w warunkach globalizacji i rosnącej konkurencji,</li>
+    <li>Poprawa jakości wyrobów oraz wsparcie procesów ich wytwarzania,</li>
+    <li>Redukcja kosztów dzięki eliminacji błędów wynikających z niejednoznacznej specyfikacji,</li>
+    <li>Efektywne zarządzanie zasobami w projektowaniu, produkcji i kontroli jakości.</li>
+  </ul>
+
+  <!-- Kolejne akapity -->
+  <p class="text-justify">
+    Bezpośrednim celem każdego zakładu wytwórczego jest produkowanie wyrobów dobrej jakości
+    przy jak najmniejszym nakładzie pracy i kosztów. Osiągnięcie tego celu możliwe jest tylko
+    przy wytwarzaniu dużej ilości takich samych przedmiotów tzn. przy produkcji masowej
+    lub co najmniej seryjnej dzięki zastosowaniu odpowiednich środków technicznych i
+    organizacyjnych. Jednym z zasadniczych środków jest stosowanie w wytwarzaniu masowym
+    i seryjnym zasady zamienności części.
+  </p>
+
+  <p class="text-justify">
+    Podstawowym warunkiem zapewnienia zamienności wytwarzanych części jest należyte ich
+    zwymiarowanie. Wymiarowanie poszczególnego elementu winno uwzględniać wymagania decydujące
+    o działaniu zespołu oraz możliwości wykonawcze tj. obróbkowe i montażowe, jak również
+    i kontrolę wykonania.
+  </p>
+
+  <!-- Cytat / ramka wyróżniająca -->
+  <div class="alert alert-light border-left border-primary mt-4">
+    <strong>Definicje:</strong>
+    <ul>
+      <li><b>Normalizacja</b> – stosowanie uzgodnionych standardów, które ujednolicają sposób tworzenia dokumentacji technicznej.</li>
+      <li><b>ISO GPS</b> – system norm regulujących specyfikację wymiarów i tolerancji geometrycznych.</li>
+      <li><b>GPS</b> – zestaw norm ISO obejmujących specyfikację i weryfikację geometrycznych cech produktów.</li>
+      <li><b>Tolerancje</b> – dopuszczalne odchylenia wymiarowe i geometryczne elementów.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="container mt-5">
+
+  <!-- Nagłówek rozdziału -->
+  <h2 class="mb-4">2. Podział i struktura norm ISO z zakresu GPS</h2>
+
+  <!-- Tekst główny -->
+  <p class="text-justify">
+    System ISO GPS (Geometrical Product Specifications) to zbiór międzynarodowych
+    norm opracowanych przez Komitet Techniczny ISO/TC 213, które regulują specyfikację
+    i weryfikację geometrycznych cech produktów. Celem systemu jest jednoznaczne
+    definiowanie wymagań dotyczących:
+  </p>
+
+  <!-- Lista punktów -->
+  <ul>
+    <li>Wymiarów,</li>
+    <li>Kształtu,</li>
+    <li>Kierunku,</li>
+    <li>Położenia,</li>
+    <li>Bicia w przestrzeni 3D.</li>
+  </ul>
+
+  <p class="text-justify">
+    ISO GPS stanowi graficzny język techniczny, który składa się z:
+  </p>
+
+  <ul>
+    <li>Symboli – określających tolerancje i wymagania,</li>
+    <li>Zasad – regulujących sposób stosowania tolerancji,</li>
+    <li>Definicji – precyzujących znaczenie poszczególnych oznaczeń.</li>
+  </ul>
+
+  <p class="text-justify">
+    Tolerancje na rysunku powinny być wyspecyfikowane zgodnie z wymaganiami
+    funkcjonalnymi.
+  </p>
+
+  <!-- Cele stosowania -->
+  <h5>Cele stosowania systemu ISO GPS:</h5>
+  <ul>
+    <li>Zapewnienie skutecznej komunikacji między konstruktorem, technologiem i metrologiem,</li>
+    <li>Eliminacja kontrowersji i niejednoznaczności w interpretacji dokumentacji,</li>
+    <li>Jednoznaczna specyfikacja geometrii wyrobów – niemożliwa przy prostym tolerowaniu plus/minus,</li>
+    <li>Zastosowanie znormalizowanych symboli umożliwia większe tolerancje oraz upraszcza projektowanie sprawdzianów,</li>
+    <li>Bez znajomości ISO GPS nie jest możliwe ani tworzenie, ani czytanie dokumentacji technicznej.</li>
+  </ul>
+
+  <!-- Tolerancje geometryczne -->
+  <h5>Tolerancje geometryczne w normach:</h5>
+  <ul>
+    <li><b>ISO 1101:2017; PN-EN ISO 1101:2013-07E; PN-EN ISO 1101:2006</b> – Tolerancje kształtu, kierunku, położenia i bicia,</li>
+    <li><b>PN-EN ISO 5459:2011P</b> – Bazy i układy baz,</li>
+    <li><b>PN-EN ISO 2692:2015E</b> – Wymaganie maksimum materiału (MMR), minimum materiału (LMR) i wzajemności (RPR),</li>
+    <li><b>ASME Y14.5-2009</b> – Engineering drawing & related documentation practices.</li>
+  </ul>
+
+  <p class="text-justify">
+    Sprowadza się to do sytuacji, w której łatwo o pomyłki, gdyż istnieje 14 identycznych
+    symboli, ale nie zawsze są one interpretowane w ten sam sposób.
+  </p>
+
+  <!-- Rysunek -->
+  <div class="text-center mt-4">
+    <img src="{{ url_for('static', filename='images/index/Rysunek_1.jpg') }}" alt="Graficzne przedstawienie podziału tolerancji geometrycznych ISO" class="img-fluid rounded shadow">
+    <p class="mt-2"><i>Rysunek 1. Graficzne przedstawienie podziału tolerancji geometrycznych ISO [1]</i></p>
+  </div>
+
+</div>
+
+<div class="text-center mt-5 mb-4">
+  <a href="test_1" class="btn btn-primary btn-lg shadow">
+    Przetestuj swoja wiedze z z tematów wyżej
+  </a>
+</div>
+
+
+
+</div>
+{% endblock %}

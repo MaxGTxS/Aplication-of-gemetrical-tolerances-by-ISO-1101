@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #004080;">
+    <a class="navbar-brand" href="{{url_for('index')}}">Strona główna</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('add_user')}}">Rejestracja <span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('login')}}">Logowanie </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('user')}}">Profil</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('wstep')}}">Wstep do tolerancji</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('kierunek')}}">Tolerancja kierunku</a>
+        </li>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="{{url_for('polozenie')}}">Tolerancja polożenia</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('test_1')}}">test_1</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('test_2')}}">test_2</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('test_3')}}">test_3</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('test_4')}}">test_4</a>
+        </li>
+
+
+
+      </ul>
+
+    </div>
+  </nav>

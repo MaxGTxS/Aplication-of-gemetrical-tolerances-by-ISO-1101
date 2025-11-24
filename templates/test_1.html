@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Test wiedzy – ISO GPS</h1>
+<form id="quizForm">
+    <ol>
+        <li>
+            Dlaczego precyzyjna specyfikacja wymagań geometrycznych jest kluczowa w inżynierii?<br>
+            <label><input type="radio" name="q1" value="A"> A) Umożliwia poprawne wykonanie i montaż części, redukując błędy produkcyjne.</label><br>
+            <label><input type="radio" name="q1" value="B"> B) Służy jedynie do estetycznego przedstawienia projektu na rysunku technicznym.</label><br>
+            <label><input type="radio" name="q1" value="C"> C) Jest stosowana tylko w lotnictwie i motoryzacji, nie ma znaczenia w innych branżach.</label>
+        </li>
+        <li>
+            Jakie korzyści przynosi wdrożenie systemu ISO GPS w dokumentacji technicznej?<br>
+            <label><input type="radio" name="q2" value="A"> A) Zwiększa jednoznaczność dokumentacji, redukuje koszty i poprawia jakość wyrobów.</label><br>
+            <label><input type="radio" name="q2" value="B"> B) Utrudnia interpretację rysunków technicznych poprzez nadmierne skomplikowanie oznaczeń.</label><br>
+            <label><input type="radio" name="q2" value="C"> C) Pozwala na dowolne określanie wymiarów przez konstruktora bez konieczności ich weryfikacji.</label>
+        </li>
+        <li>
+            W jaki sposób system ISO GPS wspomaga współpracę międzynarodową?<br>
+            <label><input type="radio" name="q3" value="A"> A) Ujednolica sposób oznaczania wymagań geometrycznych, czyniąc rysunki zrozumiałymi globalnie.</label><br>
+            <label><input type="radio" name="q3" value="B"> B) Ogranicza możliwość stosowania norm międzynarodowych, co komplikuje produkcję.</label><br>
+            <label><input type="radio" name="q3" value="C"> C) Jest przydatny tylko w Europie, ale nie ma znaczenia w innych regionach.</label>
+        </li>
+        <li>
+            Czym jest system ISO GPS i kto odpowiada za jego opracowanie?<br>
+            <label><input type="radio" name="q4" value="A"> A) Jest to międzynarodowy system specyfikacji geometrycznych opracowany przez Komitet Techniczny ISO/TC 213.</label><br>
+            <label><input type="radio" name="q4" value="B"> B) Jest to lokalna norma stosowana tylko w Unii Europejskiej, opracowana przez inżynierów motoryzacyjnych.</label><br>
+            <label><input type="radio" name="q4" value="C"> C) Jest to system oznaczeń graficznych stworzony przez producentów oprogramowania CAD.</label>
+        </li>
+        <li>
+            Jakie cechy geometryczne produktów definiuje system ISO GPS?<br>
+            <label><input type="radio" name="q5" value="A"> A) Wymiary, kształt, kierunek, położenie i bicie.</label><br>
+            <label><input type="radio" name="q5" value="B"> B) Wyłącznie długość i szerokość elementu.</label><br>
+            <label><input type="radio" name="q5" value="C"> C) Jedynie tolerancje wymiarowe, bez uwzględnienia geometrii.</label>
+        </li>
+        <li>
+            Z jakich elementów składa się graficzny język techniczny ISO GPS?<br>
+            <label><input type="radio" name="q6" value="A"> A) Z symboli, zasad i definicji.</label><br>
+            <label><input type="radio" name="q6" value="B"> B) Z instrukcji spawania, kolorów i materiałów.</label><br>
+            <label><input type="radio" name="q6" value="C"> C) Z przypadkowych oznaczeń wybieranych przez konstruktora.</label>
+        </li>
+        <li>
+            W jaki sposób system ISO GPS eliminuje nieporozumienia między konstruktorem, technologiem i metrologiem?<br>
+            <label><input type="radio" name="q7" value="A"> A) Poprzez jednoznaczne określenie wymagań geometrycznych za pomocą standardowych oznaczeń.</label><br>
+            <label><input type="radio" name="q7" value="B"> B) Dzięki możliwości stosowania dowolnych symboli przez konstruktora.</label><br>
+            <label><input type="radio" name="q7" value="C"> C) Poprzez uproszczenie dokumentacji i usunięcie większości tolerancji.</label>
+        </li>
+        <li>
+            Jakie znaczenie dla redukcji kosztów ma stosowanie precyzyjnych definicji wymagań geometrycznych?<br>
+            <label><input type="radio" name="q8" value="A"> A) Pozwala na zastosowanie większych tolerancji tam, gdzie jest to możliwe, co redukuje koszty produkcji.</label><br>
+            <label><input type="radio" name="q8" value="B"> B) Powoduje konieczność bardziej rygorystycznych kontroli, zwiększając koszty.</label><br>
+            <label><input type="radio" name="q8" value="C"> C) Nie ma wpływu na koszty, służy jedynie celom teoretycznym.</label>
+        </li>
+        <li>
+            Co to jest sprawdzian funkcjonalny (MMR) i jakie ma znaczenie w kontroli jakości?<br>
+            <label><input type="radio" name="q9" value="A"> A) Jest to narzędzie do weryfikacji zgodności części z wymaganiami funkcjonalnymi.</label><br>
+            <label><input type="radio" name="q9" value="B"> B) Jest to system komputerowy do analizy dokumentacji technicznej.</label><br>
+            <label><input type="radio" name="q9" value="C"> C) Jest to metoda testowania wytrzymałości materiału na zginanie.</label>
+        </li>
+        <li>
+            Na czym polega tolerowanie liczbowe i jakie wartości są w nim określane?<br>
+            <label><input type="radio" name="q10" value="A"> A) Określa dopuszczalne wartości graniczne wymiaru, np. górną i dolną.</label><br>
+            <label><input type="radio" name="q10" value="B"> B) Opiera się wyłącznie na graficznych symbolach, bez wartości liczbowych.</label><br>
+            <label><input type="radio" name="q10" value="C"> C) Jest stosowane tylko w przypadku tolerancji kształtu, a nie wymiarów.</label>
+        </li>
+        <li>
+            Jakie oznaczenia stosuje się dla wymiarów wałków i otworów w tolerowaniu liczbowym?<br>
+            <label><input type="radio" name="q11" value="A"> A) Małe litery dla wałków (np. es) i wielkie litery dla otworów (np. EI).</label><br>
+            <label><input type="radio" name="q11" value="B"> B) Oznaczenia są dowolne i zależą od inżyniera przygotowującego dokumentację.</label><br>
+            <label><input type="radio" name="q11" value="C"> C) Nie stosuje się żadnych specjalnych oznaczeń dla wałków i otworów.</label>
+        </li>
+        <li>
+            Czym różni się tolerowanie symboliczne od liczbowego i jakie są jego zalety?<br>
+            <label><input type="radio" name="q12" value="A"> A) Używa standardowych symboli ISO GPS, co jednoznacznie określa wymagania geometryczne.</label><br>
+            <label><input type="radio" name="q12" value="B"> B) Polega wyłącznie na podawaniu zakresu wartości liczbowych.</label><br>
+            <label><input type="radio" name="q12" value="C"> C) Jest metodą stosowaną tylko w przypadku produkcji jednostkowej.</label>
+        </li>
+        <li>
+            Jak tolerancje geometryczne wpływają na precyzję wykonania i montażu części?<br>
+            <label><input type="radio" name="q13" value="A"> A) Pozwalają określić dopuszczalne odchyłki, co umożliwia prawidłowe dopasowanie i funkcjonowanie elementów.</label><br>
+            <label><input type="radio" name="q13" value="B"> B) Powodują wzrost kosztów poprzez konieczność produkcji idealnie zgodnej z modelem CAD.</label><br>
+            <label><input type="radio" name="q13" value="C"> C) Nie mają większego znaczenia dla jakości montażu, ponieważ części są zawsze idealnie dopasowane.</label>
+        </li>
+    </ol>
+
+    <button type="button" class="btn btn-primary" onclick="checkAnswers()">Sprawdź wynik</button>
+</form>
+
+<div id="result" style="margin-top:20px; font-weight:bold;"></div>
+
+<style>
+.correct { background-color: #c8e6c9; } /* zielony */
+.incorrect { background-color: #ffcdd2; } /* czerwony */
+</style>
+
+<script>
+function checkAnswers() {
+    const correctAnswers = {
+        q1: "A", q2: "A", q3: "A", q4: "A", q5: "A",
+        q6: "A", q7: "A", q8: "A", q9: "A", q10: "A",
+        q11: "A", q12: "A", q13: "A"
+    };
+
+    let score = 0;
+    let total = Object.keys(correctAnswers).length;
+
+    // reset kolorów
+    document.querySelectorAll("label").forEach(label => {
+        label.classList.remove("correct", "incorrect");
+    });
+
+    for (let q in correctAnswers) {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        let correctInput = document.querySelector(`input[name="${q}"][value="${correctAnswers[q]}"]`);
+
+        if (correctInput) {
+            correctInput.parentElement.classList.add("correct");
+        }
+
+        if (selected) {
+            if (selected.value === correctAnswers[q]) {
+                score++;
+            } else {
+                selected.parentElement.classList.add("incorrect");
+            }
+        }
+    }
+
+    document.getElementById("result").innerHTML = 
+        `Twój wynik: ${score} / ${total} (${Math.round(score/total*100)}%)`;
+}
+</script>
+{% endblock %}
+    

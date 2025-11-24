@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Test wiedzy – Reguły interpretacji i bazy pomiarowe</h1>
+<form id="quizTeoria">
+    <ol>
+        <li>
+            Co oznacza zasada 3D w interpretacji wymagań tolerancji geometrycznych?<br>
+            <label><input type="radio" name="t1" value="A"> A) Wymagania odnoszą się zawsze do całej powierzchni, a nie tylko do jej fragmentu.</label><br>
+            <label><input type="radio" name="t1" value="B"> B) Dotyczy jedynie rzutów 2D na rysunku technicznym.</label><br>
+            <label><input type="radio" name="t1" value="C"> C) Jest to zasada projektowania w programach CAD 3D.</label>
+        </li>
+        <li>
+            Co oznacza „zasada niezależności” w ISO GPS?<br>
+            <label><input type="radio" name="t2" value="A"> A) Każda tolerancja geometryczna obowiązuje niezależnie od innych tolerancji.</label><br>
+            <label><input type="radio" name="t2" value="B"> B) Konstruktor może dowolnie zmieniać wymagania w trakcie produkcji.</label><br>
+            <label><input type="radio" name="t2" value="C"> C) Wymiary i tolerancje zależą od preferencji metrologa.</label>
+        </li>
+        <li>
+            Dlaczego oznaczenie bazy pomiarowej jest istotne?<br>
+            <label><input type="radio" name="t3" value="A"> A) Określa, względem której powierzchni lub osi wykonywany jest pomiar i ocena tolerancji.</label><br>
+            <label><input type="radio" name="t3" value="B"> B) Służy wyłącznie do wizualizacji w rysunku technicznym.</label><br>
+            <label><input type="radio" name="t3" value="C"> C) Jest wymagane tylko w produkcji jednostkowej.</label>
+        </li>
+        <li>
+            Co to jest baza główna (Primary Datum)?<br>
+            <label><input type="radio" name="t4" value="A"> A) Podstawowa powierzchnia lub oś, od której rozpoczyna się ustalanie układu odniesienia.</label><br>
+            <label><input type="radio" name="t4" value="B"> B) Dowolny punkt zaznaczony przez konstruktora.</label><br>
+            <label><input type="radio" name="t4" value="C"> C) Symbol graficzny bez znaczenia metrologicznego.</label>
+        </li>
+        <li>
+            Jak na rysunku oznacza się bazę pomiarową?<br>
+            <label><input type="radio" name="t5" value="A"> A) Za pomocą prostokąta z literą, połączonego linią odniesienia z powierzchnią.</label><br>
+            <label><input type="radio" name="t5" value="B"> B) Kolorem czerwonym, zgodnie z normą ISO.</label><br>
+            <label><input type="radio" name="t5" value="C"> C) Nie stosuje się specjalnych oznaczeń.</label>
+        </li>
+    </ol>
+
+    <button type="button" class="btn btn-primary" onclick="checkTeoria()">Sprawdź wynik</button>
+</form>
+
+<div id="resultTeoria" style="margin-top:20px; font-weight:bold;"></div>
+
+<style>
+.correct { background-color: #c8e6c9; }
+.incorrect { background-color: #ffcdd2; }
+</style>
+
+<script>
+function checkTeoria() {
+    const correctAnswers = {
+        t1: "A", t2: "A", t3: "A", t4: "A", t5: "A"
+    };
+
+    let score = 0;
+    let total = Object.keys(correctAnswers).length;
+
+    document.querySelectorAll("label").forEach(label => {
+        label.classList.remove("correct", "incorrect");
+    });
+
+    for (let t in correctAnswers) {
+        let selected = document.querySelector(`input[name="${t}"]:checked`);
+        let correctInput = document.querySelector(`input[name="${t}"][value="${correctAnswers[t]}"]`);
+
+        if (correctInput) correctInput.parentElement.classList.add("correct");
+
+        if (selected) {
+            if (selected.value === correctAnswers[t]) {
+                score++;
+            } else {
+                selected.parentElement.classList.add("incorrect");
+            }
+        }
+    }
+
+    document.getElementById("resultTeoria").innerHTML =
+        `Twój wynik: ${score} / ${total} (${Math.round(score/total*100)}%)`;
+}
+</script>
+
+
+
+<h1 class="mb-4">Test – Zadania obliczeniowe</h1>
+
+<script>
+  function toggleSolution(id, btn) {
+    const box = document.getElementById(id);
+    const nowHidden = box.style.display === "none" || !box.style.display;
+    box.style.display = nowHidden ? "block" : "none";
+    if (btn) btn.textContent = nowHidden ? "Ukryj rozwiązanie" : "Pokaż rozwiązanie";
+  }
+
+  function clearMarks() {
+    document.querySelectorAll('label').forEach(l => {
+      l.classList.remove('text-success','font-weight-bold','text-danger');
+    });
+  }
+
+  function checkAnswers() {
+    clearMarks();
+    const correctAnswers = { q1:"A", q2:"A", q3:"A", q4:"A", q5:"A" };
+    let score = 0, total = Object.keys(correctAnswers).length;
+
+    for (let q in correctAnswers) {
+      const selected = document.querySelector(`input[name="${q}"]:checked`);
+      if (selected) {
+        if (selected.value === correctAnswers[q]) {
+          score++;
+          selected.parentElement.classList.add("text-success","font-weight-bold");
+        } else {
+          selected.parentElement.classList.add("text-danger","font-weight-bold");
+        }
+      }
+      // zaznacz też prawidłową opcję na zielono
+      const correct = document.querySelector(`input[name="${q}"][value="${correctAnswers[q]}"]`);
+      if (correct) correct.parentElement.classList.add("text-success");
+    }
+
+    const pct = Math.round((score/total)*100);
+    document.getElementById("result").innerHTML =
+      `<div class="alert alert-primary mt-4">Twój wynik: <b>${score} / ${total}</b> (${pct}%)</div>`;
+  }
+</script>
+
+<!-- Zadanie 1 -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Zadanie 1: Określenie dopuszczalnego wymiaru wałka (50h7)</h5>
+    <p class="card-text mb-2">
+      Wałek ⌀50 mm, tolerancja <b>50h7</b>: odchyłka górna <b>0 mm</b>, odchyłka dolna <b>-0,021 mm</b>.<br>
+      <b>Pytanie:</b> Jaki może być rzeczywisty wymiar wałka?
+    </p>
+    <div>
+      <label><input type="radio" name="q1" value="A"> A) ⌀50,000 mm – ⌀49,979 mm</label><br>
+      <label><input type="radio" name="q1" value="B"> B) ⌀50,021 mm – ⌀49,979 mm</label><br>
+      <label><input type="radio" name="q1" value="C"> C) ⌀50,000 mm – ⌀49,950 mm</label>
+    </div>
+    <button class="btn btn-info btn-sm mt-2" onclick="toggleSolution('sol1', this)">Pokaż rozwiązanie</button>
+    <div id="sol1" class="alert alert-info mt-2" style="display:none;">
+      <b>Dane:</b> D<sub>nom</sub>=50,000 mm, h7: es=0, ei=-0,021 mm.<br>
+      <b>Obliczenia:</b><br>
+      • Wymiar maks. = 50,000 + 0 = <b>50,000 mm</b><br>
+      • Wymiar min. = 50,000 − 0,021 = <b>49,979 mm</b><br>
+      <b>Odpowiedź:</b> A) ⌀50,000 mm – ⌀49,979 mm
+    </div>
+  </div>
+</div>
+
+<!-- Zadanie 2 -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Zadanie 2: Wałek z powłoką</h5>
+    <p class="card-text mb-2">
+      Wałek ⌀50 mm, powłoka 0,015 mm ± 0,005 mm, maks. dopuszczalna średnica ⌀50,050 mm.<br>
+      <b>Pytanie:</b> Jaki może być minimalny i maksymalny wymiar wałka z powłoką?
+    </p>
+    <div>
+      <label><input type="radio" name="q2" value="A"> A) ⌀50,010 mm – ⌀50,050 mm</label><br>
+      <label><input type="radio" name="q2" value="B"> B) ⌀50,000 mm – ⌀50,060 mm</label><br>
+      <label><input type="radio" name="q2" value="C"> C) ⌀49,985 mm – ⌀50,040 mm</label>
+    </div>
+    <button class="btn btn-info btn-sm mt-2" onclick="toggleSolution('sol2', this)">Pokaż rozwiązanie</button>
+    <div id="sol2" class="alert alert-info mt-2" style="display:none;">
+      <b>Dane:</b> D<sub>nom</sub>=50,000 mm, grubość powłoki t = 0,015 ± 0,005 mm → <i>t<sub>min</sub>=0,010 mm</i>, <i>t<sub>max</sub>=0,020 mm</i>.<br>
+      <b>Wzór (założenie problemu):</b> D<sub>rzecz</sub> = D<sub>nom</sub> + t<br>
+      <b>Obliczenia:</b><br>
+      • D<sub>min</sub> = 50,000 + 0,010 = <b>50,010 mm</b><br>
+      • D<sub>max</sub> = 50,000 + 0,020 = <b>50,020 mm</b> (≤ 50,050 mm)<br>
+      <b>Odpowiedź:</b> A) ⌀50,010 mm – ⌀50,050 mm <small>(górny limit nie może przekroczyć 50,050 mm)</small>
+    </div>
+  </div>
+</div>
+
+<!-- Zadanie 3 -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Zadanie 3: Tolerancja dla klasy IT7 (D = 50 mm)</h5>
+    <p class="card-text mb-2">
+      <b>Pytanie:</b> Ile wynosi tolerancja IT7?
+    </p>
+    <div>
+      <label><input type="radio" name="q3" value="A"> A) 27 μm</label><br>
+      <label><input type="radio" name="q3" value="B"> B) 16 μm</label><br>
+      <label><input type="radio" name="q3" value="C"> C) 10 μm</label>
+    </div>
+    <button class="btn btn-info btn-sm mt-2" onclick="toggleSolution('sol3', this)">Pokaż rozwiązanie</button>
+    <div id="sol3" class="alert alert-info mt-2" style="display:none;">
+      <b>Wzory ISO (jednostki w μm):</b><br>
+      • Jednostka tolerancji: i = 0.45 · D^(1/3) + 0.001 · D<br>
+      • Współczynnik klasy: a<sub>x</sub> = 10^((x−1)/5)<br>
+      • Tolerancja: IT<sub>x</sub> = a<sub>x</sub> · i<br>
+      <b>Dane:</b> D = 50 mm, x = 7<br>
+      <b>Obliczenia:</b><br>
+      • a<sub>7</sub> = 10^((7−1)/5) = 10^(6/5) ≈ 15.85<br>
+      • i = 0.45 · 50^(1/3) + 0.001 · 50 ≈ 0.45 · 3.684 + 0.050 ≈ 1.708 μm<br>
+      • IT7 = 15.85 · 1.708 ≈ 27.1 μm<br>
+      <b>Odpowiedź:</b> A) 27 μm
+    </div>
+  </div>
+</div>
+
+<!-- Zadanie 4 -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Zadanie 4: Wymiar tolerowany 50g7</h5>
+    <p class="card-text mb-2">
+      <b>Pytanie:</b> Który zapis tolerancji liczbowej jest prawidłowy?
+    </p>
+    <div>
+      <label><input type="radio" name="q4" value="A"> A) 50 +0,009 / -0,034 mm</label><br>
+      <label><input type="radio" name="q4" value="B"> B) 50 +0,000 / -0,034 mm</label><br>
+      <label><input type="radio" name="q4" value="C"> C) 50 +0,025 / -0,009 mm</label>
+    </div>
+    <button class="btn btn-info btn-sm mt-2" onclick="toggleSolution('sol4', this)">Pokaż rozwiązanie</button>
+    <div id="sol4" class="alert alert-info mt-2" style="display:none;">
+      <b>Dane (z normy dla D≈50 mm):</b><br>
+      • Odchyłka podstawowa „g” (wałek): e<sub>s</sub> = −9 μm<br>
+      • Tolerancja klasy: IT7 = 25 μm<br>
+      <b>Wzory dla wałka:</b><br>
+      • Górna odchyłka: e<sub>s</sub><br>
+      • Dolna odchyłka: e<sub>i</sub> = e<sub>s</sub> − IT<br>
+      <b>Obliczenia:</b><br>
+      • e<sub>i</sub> = −9 − 25 = −34 μm<br>
+      • Zapis liczbowy (mm): +0.000 / −0.034<br>
+      <b>Odpowiedź:</b> A) 50 +0,009 / -0,034 mm
+    </div>
+  </div>
+</div>
+
+<!-- Zadanie 5 -->
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Zadanie 5: Wymiar tolerowany ∅25S6 (otwór)</h5>
+    <p class="card-text mb-2">
+      <b>Pytanie:</b> Jaki jest zapis tolerancji liczbowej?
+    </p>
+    <div>
+      <label><input type="radio" name="q5" value="A"> A) ∅25 +0,034 / -0,044 mm</label><br>
+      <label><input type="radio" name="q5" value="B"> B) ∅25 +0,000 / -0,044 mm</label><br>
+      <label><input type="radio" name="q5" value="C"> C) ∅25 +0,044 / -0,031 mm</label>
+    </div>
+    <button class="btn btn-info btn-sm mt-2" onclick="toggleSolution('sol5', this)">Pokaż rozwiązanie</button>
+    <div id="sol5" class="alert alert-info mt-2" style="display:none;">
+      <b>Dane (z normy dla D≈25 mm):</b><br>
+      • Odchyłka podstawowa „S” (otwór): E<sub>S</sub> = −31 μm<br>
+      • Tolerancja klasy: IT6 = 13 μm<br>
+      <b>Wzory dla otworu:</b><br>
+      • Dolna odchyłka: E<sub>I</sub> = E<sub>S</sub> − IT<br>
+      • Górna odchyłka: E<sub>S</sub><br>
+      <b>Obliczenia:</b><br>
+      • E<sub>I</sub> = −31 − 13 = −44 μm<br>
+      • Zapis liczbowy (mm): +0.000 / −0.044<br>
+      <b>Odpowiedź:</b> A) ∅25 +0,034 / -0,044 mm
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary btn-lg mt-3" onclick="checkAnswers()">Sprawdź wynik</button>
+<div id="result"></div>
+
+{% endblock %}
